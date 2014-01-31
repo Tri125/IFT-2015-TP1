@@ -11,81 +11,103 @@ class Liste:
 		tmp = []
 		for value in self.mots:
 			tuple = (value.get_cle(), value.get_compte())
-			tmp.append(list(tuple))
-		return ','.join(str(v) for v in tmp)
+			tmp.append( (tuple) )
+		return '[' + ', '.join(str(v) for v in tmp) + ']'
 		
 	def inserer(self, element):
 		if isinstance(element, Mot):
-			if (element not in self.mots):
+			if (not self.trouver(element)):
 				element.incrementer()
 				self.mots.append(element)
 			else:
 				next(value for value in self.mots if value == element).incrementer()
-	# def supprimer(self, element):
-		#TODO
-	# def trouver(self, element):
-		#TODO
-	# def get_mot(self, element):
-		#TODO
+		else:
+			return NotImplemented
+		
+	def supprimer(self, element):
+		if isinstance(element, Mot):
+			if (self.trouver(element)):
+				index = self.mots.index(element)
+				if (self.mots[index].get_compte() == 1):
+					del self.mots[index]
+				else:
+					self.mots[index].decrementer()
+		else:
+			return NotImplemented
+		
+		
+	def trouver(self, element):
+		if isinstance(element, Mot):
+			return (element in self.mots)
+		else:
+			return NotImplemented
+	
+	
+	
+	def get_mot(self, element):
+		if isinstance(element, Mot):
+			if (self.trouver(element)):
+				return next(value for value in self.mots if value == element)
+			else:
+				return None
+		else:
+			return NotImplemented
+
+			
 teste = Liste()
 a = Mot("a")
 b = Mot("b")
-z = Mot("z")
-
 teste.inserer(a)
-teste.inserer(z)
 teste.inserer(b)
-
 print(teste)
 
-
-# if __name__ == '__main__':
+if __name__ == '__main__':
 	
-	# """Validation de la classe (unit testing)"""
+	"""Validation de la classe (unit testing)"""
 	
-	# liste = Liste()
-	# with open('text1.txt') as texte:
-		# for ligne in texte:
-			# liste_mots_ligne = ligne.split()
-			# for mot_brut in liste_mots_ligne:
-				# mot_strip = mot_brut.strip('!?%(),;:\'".')
-				# liste.inserer(mot_strip)
+	liste = Liste()
+	with open('text1.txt') as texte:
+		for ligne in texte:
+			liste_mots_ligne = ligne.split()
+			for mot_brut in liste_mots_ligne:
+				mot_strip = mot_brut.strip('!?%(),;:\'".')
+				liste.inserer(mot_strip)
 			
-	# liste.supprimer("and")
-	# liste.supprimer("to")
-	# liste.supprimer("fragments")
-	# liste.supprimer("qwerty")
+	liste.supprimer("and")
+	liste.supprimer("to")
+	liste.supprimer("fragments")
+	liste.supprimer("qwerty")
 	
-	# if not liste.trouver("and"):
-		# print("Une erreur s'est produite...")
-	# elif not liste.trouver("to"):
-		# print("Une erreur s'est produite...")
-	# elif liste.trouver("fragments"):
-		# print("Une erreur s'est produite...")
-	# elif liste.trouver("qwerty"):
-		# print("Une erreur s'est produite...")
-	# elif liste.get_mot("and").get_compte() != 6:
-		# print("Une erreur s'est produite...")
-	# elif liste.get_mot("to").get_compte() != 1:
-		# print("Une erreur s'est produite...")
-	# elif liste.get_mot("fragments") != None:
-		# print("Une erreur s'est produite...")
-	# elif liste.get_mot("qwerty") != None:
-		# print("Une erreur s'est produite...")
+	if not liste.trouver("and"):
+		print("Une erreur s'est produite...")
+	elif not liste.trouver("to"):
+		print("Une erreur s'est produite...")
+	elif liste.trouver("fragments"):
+		print("Une erreur s'est produite...")
+	elif liste.trouver("qwerty"):
+		print("Une erreur s'est produite...")
+	elif liste.get_mot("and").get_compte() != 6:
+		print("Une erreur s'est produite...")
+	elif liste.get_mot("to").get_compte() != 1:
+		print("Une erreur s'est produite...")
+	elif liste.get_mot("fragments") != None:
+		print("Une erreur s'est produite...")
+	elif liste.get_mot("qwerty") != None:
+		print("Une erreur s'est produite...")
 	
-	# with open('text1_Liste_test.txt', 'w') as test:
-		# print(liste, file = test)
+	with open('text1_Liste_test.txt', 'w') as test:
+		print(liste, file = test)
 	
-	# if filecmp.cmp("text1_Liste.txt", "text1_Liste_test.txt"):
-		# print("Aucun bug détecté.")
-	# else:
-		# print("Il y a un bug...")
-		# print("Alors que l'objet devrait s'imprimer ainsi :")
-		# print()
-		# print(open("text1_Liste.txt").read())
-		# print("Il s'imprime plutôt ainsi :")
-		# print()
-		# print(liste)
+	if filecmp.cmp("text1_Liste.txt", "text1_Liste_test.txt"):
+		print("Aucun bug détecté.")
+	else:
+		print("Il y a un bug...")
+		print("Alors que l'objet devrait s'imprimer ainsi :")
+		print()
+		print(open("text1_Liste.txt").read())
+		print("Il s'imprime plutôt ainsi :")
+		print()
+		print(liste)
 
 
 
