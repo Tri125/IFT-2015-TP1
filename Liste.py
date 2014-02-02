@@ -53,13 +53,6 @@ class Liste:
 		else:
 			return NotImplemented
 
-			
-teste = Liste()
-a = Mot("a")
-b = Mot("b")
-teste.inserer(a)
-teste.inserer(b)
-print(teste)
 
 if __name__ == '__main__':
 	

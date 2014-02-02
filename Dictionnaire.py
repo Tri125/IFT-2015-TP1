@@ -5,20 +5,42 @@ from Mot import Mot
 class Dictionnaire:
 	
 	def __init__(self):
-		# TODO
+		self.mots = dict()
+		
 	def __str__(self):
-		# TODO
+		tmp = []
+		for key, value in self.mots.items():
+			tuple = (key, value)
+			tmp.append( (tuple) )
+		return '[' + ', '.join(str(v) for v in tmp) + ']'
+		
 	def inserer(self, element):
-		# TODO
+		if isinstance(element, Mot):
+			if element.get_cle() not in self.mots:
+				element.incrementer()
+				self.mots[element.get_cle()] = element.get_compte()
+			else:
+				self.mots[element.get_cle()] += 1
+		else:
+			return NotImplemented
+		
 	def supprimer(self, element):
-		# TODO
+		if isinstance(element, Mot):
+			if element.get_cle() in self.mots:
+				if self.mots[element.get_cle()] > 1:
+					self.mots[element.get_cle()] -= 1  
+				else: 
+					self.mots.pop(element.get_cle(), None)
+		else:
+			return NotImplemented
+		
 	def trouver(self, element):
-		# TODO
+		if isinstance(element, Mot):
+			return element.get_cle() in self.mots
+		
 	def get_mot(self, element):
-		# TODO
-
-
-
+		if isinstance(element, Mot):
+		 return self.mots[element.get_compte()] if element.get_cle() in self.mots  else None
 
 if __name__ == '__main__':
 	
