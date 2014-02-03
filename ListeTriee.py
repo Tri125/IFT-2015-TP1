@@ -57,9 +57,7 @@ class ListeTriee:
 		
 		
 	def recherche_binaire(self, data, cible, min, max, profondeur = 0 ):
-		print( profondeur * ' ', 'recherche_binaire(', data, ',', cible, ',', min, ',', max, ',' ')' )
-		print(max)
-		print(min)
+		#print( profondeur * ' ', 'recherche_binaire(', data, ',', cible, ',', min, ',', max, ',' ')' )
 		if min > max:
 			return False #interval vide, pas de match
 		else:
@@ -74,7 +72,7 @@ class ListeTriee:
 				return self.recherche_binaire( data, cible, milieu+1, max, profondeur+1 )
 				
 	def recherche_binaire_index(self, data, cible, min, max, profondeur = 0 ):
-		print( profondeur * ' ', 'recherche_binaire_index(', data, ',', cible, ',', min, ',', max, ',', ')', )
+		#print( profondeur * ' ', 'recherche_binaire_index(', data, ',', cible, ',', min, ',', max, ',', ')', )
 		if min > max:
 			return None #interval vide, pas de match
 		else:
