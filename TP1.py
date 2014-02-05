@@ -14,40 +14,47 @@ myList = Liste()
 myOrderedList = ListeTriee()
 myDictionnary = Dictionnaire()
 
-insertList = []
+SEED = 42
+SIZE = 10000
+TimeListInsert= 0
+TimeOrderedListInsert = 0
+TimeDictionnaryInsert = 0
 
-for x in range(0,100000):
-	tmp = Mot()
-	insertList.append(Mot())
 
-ListeTotal = 0
-ListeTrieeTotal = 0
-DictionnaireTotal = 0
+def generate_RndCompte():
+				length = random.randrange(2,15) #mot de 2 à 14 lettres 
+				alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+				list_mot = []
+				for x in range(length):
+					lettre = random.randrange(len(alphabet))
+					list_mot.append(alphabet[lettre])
+				return ''.join(list_mot)
 
-for x in insertList:
-	a = copy.deepcopy(x)
-	b = copy.deepcopy(x)
-	c = copy.deepcopy(x)
-	
+				
+random.seed(SEED)
+for x in range(0, SIZE):
 	start_time = time.time()
-	myList.inserer(a)
-	elapsed_time = time.time() - start_time
-	ListeTotal += elapsed_time
-	
+	myList.inserer(Mot(generate_RndCompte()))
+	TimeListInsert += time.time() - start_time
+
+random.seed(SEED)
+for x in range(0, SIZE):
 	start_time = time.time()
-	myOrderedList.inserer(b)
-	elapsed_time = time.time() - start_time
-	ListeTrieeTotal += elapsed_time
+	myOrderedList.inserer(Mot(generate_RndCompte()))
+	TimeOrderedListInsert += time.time() - start_time
 	
+random.seed(SEED)
+for x in range(0, SIZE):
 	start_time = time.time()
-	myDictionnary.inserer(c)
-	elapsed_time = time.time() - start_time
-	DictionnaireTotal += elapsed_time
+	myDictionnary.inserer(Mot(generate_RndCompte()))
+	TimeDictionnaryInsert += time.time() - start_time
+	
+	
 
 print("Liste: ", myList)
 print("ListeTriee: ", myOrderedList)
 print("Dictionnaire: ", myDictionnary)
-print("Temps d'insertion de Liste: ", ListeTotal, "Temps d'insertion de ListeTriee: ", ListeTrieeTotal, "Temps d'insertion de Dictionnaire: ", DictionnaireTotal)
+print("Temps d'insertion de Liste: ", TimeListInsert, "Temps d'insertion de ListeTriee: ", TimeOrderedListInsert, "Temps d'insertion de Dictionnaire: ", TimeDictionnaryInsert)
 
 
 
