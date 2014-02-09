@@ -15,43 +15,31 @@ class ListeTriee:
 		return '[' + ', '.join(str(v) for v in tmp) + ']'
 		
 	def inserer(self, element):
-		if isinstance(element, Mot):
-			if (not self.trouver(element) ):
-				element.incrementer()
-				self.mots.append(element)
-				self.mots.sort()
-			else:
-				next(value for value in self.mots if value == element).incrementer()
+		if (not self.trouver(element) ):
+			index = self.recherche_binaire_index(self.mots, element, 0, len(self.mots)-1)
+			self.mots.insert(index, Mot(element))
 		else:
-			return NotImplemented
+			next(value for value in self.mots if value.get_cle() == element).incrementer()
 		
 		
 	def supprimer(self, element):
-		if isinstance(element, Mot):
-			if (self.trouver(element)):
-				index = self.recherche_binaire_index(self.mots, element, 0, len(self.mots))
-				if (self.mots[index].get_compte() == 1):
-					del self.mots[index]
-				else:
-					self.mots[index].decrementer()
-		else:
-			return NotImplemented
+		if (self.trouver(element)):
+			index = self.recherche_binaire_index(self.mots, element, 0, len(self.mots))
+			if (self.mots[index].get_compte() == 1):
+				del self.mots[index]
+			else:
+				self.mots[index].decrementer()
 		
 	def trouver(self, element):
-		if isinstance(element, Mot):
-			return  self.recherche_binaire(self.mots, element, 0, len(self.mots)-1)
-		else:
-			return NotImplemented
+		return  self.recherche_binaire(self.mots, element, 0, len(self.mots)-1)
+		
 		
 	def get_mot(self, element):
-		if isinstance(element, Mot):
-			if (self.trouver(element)):
-				index = self.recherche_binaire_index(self.mots, element, 0, len(self.mots)-1)
-				return mots[index]
-			else:
-				return None
+		if (self.trouver(element)):
+			index = self.recherche_binaire_index(self.mots, element, 0, len(self.mots)-1)
+			return self.mots[index]
 		else:
-			return NotImplemented
+			return None
 
 		
 		
@@ -62,9 +50,9 @@ class ListeTriee:
 			return False #interval vide, pas de match
 		else:
 			milieu = (min + max) // 2
-			if cible == data[milieu]:
+			if cible == data[milieu].get_cle():
 				return True
-			elif cible < data[milieu]:
+			elif cible < data[milieu].get_cle():
 				#on cherche dans la portion gauche de la liste
 				return self.recherche_binaire( data, cible, min, milieu-1, profondeur+1 )
 			else:
@@ -74,12 +62,12 @@ class ListeTriee:
 	def recherche_binaire_index(self, data, cible, min, max, profondeur = 0 ):
 		#print( profondeur * ' ', 'recherche_binaire_index(', data, ',', cible, ',', min, ',', max, ',', ')', )
 		if min > max:
-			return None #interval vide, pas de match
+			return min #interval vide, pas de match. Devrait être inserer a l'index min
 		else:
 			milieu = (min + max) // 2
-			if cible == data[milieu]:
+			if cible == data[milieu].get_cle():
 				return milieu
-			elif cible < data[milieu]:
+			elif cible < data[milieu].get_cle():
 				#on cherche dans la portion gauche de la liste
 				return self.recherche_binaire_index( data, cible, min, milieu-1, profondeur+1 )
 			else:

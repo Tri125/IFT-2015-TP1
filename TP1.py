@@ -14,7 +14,7 @@ myList = Liste()
 myOrderedList = ListeTriee()
 myDictionnary = Dictionnaire()
 
-SEED = 42
+SEED = 72
 SIZE = 10000
 TimeListInsert= 0
 TimeOrderedListInsert = 0
@@ -40,7 +40,7 @@ for x in range(0, SIZE):
 random.seed(SEED)
 for x in range(0, SIZE):
 	start_time = time.time()
-	myOrderedList.inserer(Mot(generate_RndCompte()))
+	myOrderedList.inserer(generate_RndCompte())
 	TimeOrderedListInsert += time.time() - start_time
 	
 random.seed(SEED)
