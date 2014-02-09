@@ -8,7 +8,7 @@ class Mot(object):
 						self.cle = self.generate_RndCompte()
 				else:
 						self.cle = cle
-				self.compte = 0
+				self.compte = 1
 
 	def generate_RndCompte(self):
 				length = random.randrange(2,15) #mot de 2 à 14 lettres 

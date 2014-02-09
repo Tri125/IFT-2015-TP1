@@ -15,43 +15,33 @@ class Liste:
 		return '[' + ', '.join(str(v) for v in tmp) + ']'
 		
 	def inserer(self, element):
-		if isinstance(element, Mot):
-			if (not self.trouver(element)):
-				element.incrementer()
-				self.mots.append(element)
-			else:
-				next(value for value in self.mots if value == element).incrementer()
+		if (not self.trouver(element)):
+			self.mots.append(Mot(element))
 		else:
-			return NotImplemented
+			next(value for value in self.mots if value.get_cle() == element).incrementer()
 		
 	def supprimer(self, element):
-		if isinstance(element, Mot):
-			if (self.trouver(element)):
-				index = self.mots.index(element)
-				if (self.mots[index].get_compte() == 1):
-					del self.mots[index]
-				else:
-					self.mots[index].decrementer()
-		else:
-			return NotImplemented
+		if (self.trouver(element)):
+			mot = self.get_mot(element)
+			if (mot.get_compte() == 1):
+				self.mots.remove(mot)
+			else:
+				mot.decrementer()
 		
 		
 	def trouver(self, element):
-		if isinstance(element, Mot):
-			return (element in self.mots)
-		else:
-			return NotImplemented
+		for x in self.mots:
+			if x.get_cle() == element:
+				return True
+		return False
 	
 	
 	
 	def get_mot(self, element):
-		if isinstance(element, Mot):
-			if (self.trouver(element)):
-				return next(value for value in self.mots if value == element)
-			else:
-				return None
+		if (self.trouver(element)):
+			return next(value for value in self.mots if value.get_cle() == element)
 		else:
-			return NotImplemented
+			return None
 
 
 if __name__ == '__main__':
