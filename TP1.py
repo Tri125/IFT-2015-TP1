@@ -34,7 +34,7 @@ def generate_RndCompte():
 random.seed(SEED)
 for x in range(0, SIZE):
 	start_time = time.time()
-	myList.inserer(Mot(generate_RndCompte()))
+	myList.inserer(generate_RndCompte())
 	TimeListInsert += time.time() - start_time
 
 random.seed(SEED)
