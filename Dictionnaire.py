@@ -10,37 +10,28 @@ class Dictionnaire:
 	def __str__(self):
 		tmp = []
 		for key, value in self.mots.items():
-			tuple = (key, value)
+			tuple = (value.get_cle(), value.get_compte())
 			tmp.append( (tuple) )
 		return '[' + ', '.join(str(v) for v in tmp) + ']'
 		
 	def inserer(self, element):
-		if isinstance(element, Mot):
-			if element.get_cle() not in self.mots:
-				element.incrementer()
-				self.mots[element.get_cle()] = element.get_compte()
-			else:
-				self.mots[element.get_cle()] += 1
+		if element not in self.mots:
+			self.mots[element] = Mot(element)
 		else:
-			return NotImplemented
+			self.mots[element].incrementer()
 		
 	def supprimer(self, element):
-		if isinstance(element, Mot):
-			if element.get_cle() in self.mots:
-				if self.mots[element.get_cle()] > 1:
-					self.mots[element.get_cle()] -= 1  
-				else: 
-					self.mots.pop(element.get_cle(), None)
-		else:
-			return NotImplemented
+		if element in self.mots:
+			if self.mots[element].get_compte() > 1:
+				self.mots[element].decrementer()  
+			else: 
+				self.mots.pop(element, None)
 		
 	def trouver(self, element):
-		if isinstance(element, Mot):
-			return element.get_cle() in self.mots
+		return element in self.mots
 		
 	def get_mot(self, element):
-		if isinstance(element, Mot):
-		 return self.mots[element.get_compte()] if element.get_cle() in self.mots  else None
+		return self.mots[element] if element in self.mots  else None
 
 if __name__ == '__main__':
 	
