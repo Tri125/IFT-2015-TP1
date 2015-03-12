@@ -1,5 +1,6 @@
-IFT-2015-TP1
+Étude empirique de la complexité d'opérations
 ============
+Projet IFT-2015-TP1
 
 Teste de complexité de differente operations dans differentes structures de données testées empiriquement
 
