@@ -7,4 +7,4 @@ Teste de complexité de differente operations dans differentes structures de don
 
 ![alt tag](/Rapport/recherche.png)
 
-![alt tag](/Rapport/supression.png)
+![alt tag](/Rapport/suppression.png)
